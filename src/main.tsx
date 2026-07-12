@@ -131,7 +131,7 @@ function App() {
         <nav className="liquid-glass mx-auto flex max-w-5xl items-center justify-between rounded-full px-6 py-3">
           <a href="#" className="flex items-center gap-2 text-lg font-semibold text-white" aria-label="Home">
             <Globe size={24} aria-hidden="true" />
-            <span>Hey, there!</span>
+            <span>Gabriela</span>
           </a>
 
           <div className="flex items-center gap-8">
