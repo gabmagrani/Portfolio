@@ -129,13 +129,13 @@ function App() {
 
       <div className="relative z-20 px-6 py-6">
         <nav className="liquid-glass mx-auto flex max-w-5xl items-center justify-between rounded-full px-6 py-3">
-          <a href="#" className="flex items-center gap-2 text-lg font-semibold text-white" aria-label="Home">
+          <a href="#" className="flex items-center gap-2 text-lg font-semibold text-white" aria-label="Gabriela Magrani, home">
             <Globe size={24} aria-hidden="true" />
-            <span>Gabriela</span>
+            <span>Gabriela Magrani</span>
           </a>
 
           <div className="flex items-center gap-8">
-            {["Projects", "About"].map((item) => (
+            {["Projects", "AI Journey", "About"].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -168,11 +168,6 @@ function App() {
               <ArrowRight size={20} aria-hidden="true" />
             </button>
           </form>
-
-          <p className="px-4 text-sm leading-relaxed text-white">
-            Stay updated with the latest news and insights. Subscribe to our newsletter today and never miss out on
-            exciting updates.
-          </p>
 
           <div className="flex justify-center">
             <a
