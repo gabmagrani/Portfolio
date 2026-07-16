@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ArrowRight, Globe, Instagram, Twitter } from "lucide-react";
+import { Globe, Instagram, Menu, Twitter, X } from "lucide-react";
 import heroImage from "./assets/hero-fallback.png";
 import "./styles.css";
 
@@ -12,7 +12,10 @@ const USE_VIDEO = false;
 const videoSource =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4";
 
+const NAV_LINKS = ["Projects", "AI Journey", "About"];
+
 function App() {
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
   const animationFrameRef = React.useRef<number | null>(null);
   const fadingOutRef = React.useRef(false);
@@ -127,15 +130,19 @@ function App() {
         />
       )}
 
-      <div className="relative z-20 px-6 py-6">
+      <div className="relative z-30 px-6 py-6">
         <nav className="liquid-glass mx-auto flex max-w-5xl items-center justify-between rounded-full px-6 py-3">
-          <a href="#" className="flex items-center gap-2 text-lg font-semibold text-white" aria-label="Gabriela Magrani, home">
-            <Globe size={24} aria-hidden="true" />
+          <a
+            href="#"
+            className="flex items-center text-lg font-semibold text-white"
+            aria-label="Gabriela Magrani, home"
+          >
             <span>Gabriela Magrani</span>
           </a>
 
-          <div className="flex items-center gap-8">
-            {["Projects", "AI Journey", "About"].map((item) => (
+          {/* Desktop links */}
+          <div className="hidden items-center gap-8 md:flex">
+            {NAV_LINKS.map((item) => (
               <a
                 key={item}
                 href="#"
@@ -145,39 +152,54 @@ function App() {
               </a>
             ))}
           </div>
+
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="text-white md:hidden"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+          </button>
         </nav>
+
+        {/* Mobile dropdown */}
+        {menuOpen && (
+          <div className="liquid-glass mt-2 flex flex-col gap-1 rounded-2xl p-2 md:hidden">
+            {NAV_LINKS.map((item) => (
+              <a
+                key={item}
+                href="#"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-xl px-4 py-3 text-sm font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-white"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+        )}
       </div>
 
-      <section className="relative z-10 flex flex-1 -translate-y-[20%] flex-col items-center justify-center px-6 py-12 text-center">
+      <section className="relative z-10 flex flex-1 -translate-y-[25%] flex-col items-center justify-center px-6 py-20 text-center md:px-12">
         <h1
-          className="mb-8 whitespace-nowrap text-5xl tracking-tight text-white md:text-6xl lg:text-7xl"
+          className="mb-6 max-w-4xl text-5xl leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl"
           style={{ fontFamily: "'Instrument Serif', serif" }}
         >
           I design things. Then I build them.
         </h1>
 
-        <div className="w-full max-w-xl space-y-4">
-          <form className="liquid-glass flex items-center gap-3 rounded-full py-2 pl-6 pr-2">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              aria-label="Email address"
-              className="min-w-0 flex-1 bg-transparent text-base text-white outline-none placeholder:text-white/40"
-            />
-            <button type="submit" className="rounded-full bg-white p-3 text-black" aria-label="Submit email">
-              <ArrowRight size={20} aria-hidden="true" />
-            </button>
-          </form>
+        <p className="mb-10 max-w-xl text-lg font-light leading-relaxed text-white/70 md:text-xl">
+          A product designer driven by shipping end-to-end products.
+        </p>
 
-          <div className="flex justify-center">
-            <a
-              href="#"
-              className="liquid-glass rounded-full px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-white/5"
-            >
-              Download CV
-            </a>
-          </div>
-        </div>
+        <a
+          href="#"
+          className="liquid-glass rounded-full px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-white/5"
+        >
+          Contact me
+        </a>
       </section>
 
       <footer className="relative z-10 flex justify-center gap-4 pb-12">
