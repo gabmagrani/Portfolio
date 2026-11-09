@@ -14,6 +14,11 @@ const videoSource =
 
 const NAV_LINKS = ["Projects", "AI Journey", "About"];
 
+// Feature flags — hidden for now (no destinations yet).
+// Flip to `true` to re-enable once these pages/profiles exist.
+const SHOW_NAV_LINKS = false;
+const SHOW_SOCIALS = false;
+
 function App() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
@@ -141,32 +146,36 @@ function App() {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden items-center gap-8 md:flex">
-            {NAV_LINKS.map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-sm font-medium text-white/80 transition-colors hover:text-white"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
+          {SHOW_NAV_LINKS && (
+            <div className="hidden items-center gap-8 md:flex">
+              {NAV_LINKS.map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="text-sm font-medium text-white/80 transition-colors hover:text-white"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          )}
 
           {/* Mobile toggle */}
-          <button
-            type="button"
-            onClick={() => setMenuOpen((prev) => !prev)}
-            className="text-white md:hidden"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
-          </button>
+          {SHOW_NAV_LINKS && (
+            <button
+              type="button"
+              onClick={() => setMenuOpen((prev) => !prev)}
+              className="text-white md:hidden"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+            </button>
+          )}
         </nav>
 
         {/* Mobile dropdown */}
-        {menuOpen && (
+        {SHOW_NAV_LINKS && menuOpen && (
           <div className="liquid-glass mt-2 flex flex-col gap-1 rounded-2xl p-2 md:hidden">
             {NAV_LINKS.map((item) => (
               <a
@@ -195,36 +204,38 @@ function App() {
         </p>
 
         <a
-          href="#"
+          href="mailto:gabrielamagrani@outlook.com?subject=Hi&body=I%20would%20like%20to%20know%20more%20about%20your%20work"
           className="liquid-glass rounded-full px-8 py-3 text-sm font-medium text-white transition-colors hover:bg-white/5"
         >
           Contact me
         </a>
       </section>
 
-      <footer className="relative z-10 flex justify-center gap-4 pb-12">
-        <a
-          href="#"
-          className="liquid-glass rounded-full p-4 text-white/80 transition-all hover:bg-white/5 hover:text-white"
-          aria-label="Instagram"
-        >
-          <Instagram size={20} aria-hidden="true" />
-        </a>
-        <a
-          href="#"
-          className="liquid-glass rounded-full p-4 text-white/80 transition-all hover:bg-white/5 hover:text-white"
-          aria-label="Twitter"
-        >
-          <Twitter size={20} aria-hidden="true" />
-        </a>
-        <a
-          href="#"
-          className="liquid-glass rounded-full p-4 text-white/80 transition-all hover:bg-white/5 hover:text-white"
-          aria-label="Website"
-        >
-          <Globe size={20} aria-hidden="true" />
-        </a>
-      </footer>
+      {SHOW_SOCIALS && (
+        <footer className="relative z-10 flex justify-center gap-4 pb-12">
+          <a
+            href="#"
+            className="liquid-glass rounded-full p-4 text-white/80 transition-all hover:bg-white/5 hover:text-white"
+            aria-label="Instagram"
+          >
+            <Instagram size={20} aria-hidden="true" />
+          </a>
+          <a
+            href="#"
+            className="liquid-glass rounded-full p-4 text-white/80 transition-all hover:bg-white/5 hover:text-white"
+            aria-label="Twitter"
+          >
+            <Twitter size={20} aria-hidden="true" />
+          </a>
+          <a
+            href="#"
+            className="liquid-glass rounded-full p-4 text-white/80 transition-all hover:bg-white/5 hover:text-white"
+            aria-label="Website"
+          >
+            <Globe size={20} aria-hidden="true" />
+          </a>
+        </footer>
+      )}
     </main>
   );
 }
